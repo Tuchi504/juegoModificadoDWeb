@@ -27,7 +27,7 @@ car.crash = function (d) {
    if (!car.crashed) {
       choque();
       car.crashed = true;
-      car.speed = -0.6;
+      car.speed = -0.4;
       car.sx = d ? d : 0;
       game.audio.oscillator.frequency.value = 20;
       setTimeout(function () {
@@ -333,7 +333,7 @@ window.addEventListener("keydown", function (event) {
 window.addEventListener("keyup", function (event) {
    key.pressed[event.keyCode] = false;
    //añadido
-   if (car.speed > 6) {
+   if (car.speed > 5) {
       let tecla = event.code;
       if (tecla == 'ArrowUp') {
          turbo();
