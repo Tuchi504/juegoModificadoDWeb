@@ -240,7 +240,7 @@ km.frame = function () {
 };
 var position = document.getElementById("position");
 position.init = function () {
-   cars.total = 50;
+   cars.total = 200;
    car.position = cars.total;
 };
 position.frame = function () {
@@ -476,7 +476,7 @@ function win(){
    if (car.position == 0) {
       game.audio.oscillator.stop();
       alert('Ganaste!');
-      car.position = 50;
+      car.position = 200;
       location.reload();
    }
 }
