@@ -398,14 +398,14 @@ clickstart.addEventListener("click", function () {
 //sonido de turbo al desacelerar 
 function turbo() {
    game.audio.volume.gain.value = 0;
-   let audio = new Audio('/audio/sonido_desaceleracion_final.mp3');
+   let audio = new Audio('../juegoModificadoDWeb/audio/sonido_desaceleracion_final.mp3');
    audio.play();
    game.audio.volume.gain.value = 1;
 }
 //sonido al chocar
 function choque() {
    game.audio.volume.gain.value = 0;
-   let audio = new Audio('/audio/sonido_choque.mp3');
+   let audio = new Audio('../juegoModificadoDWeb/audio/sonido_choque.mp3');
    audio.play();
    game.audio.volume.gain.value = 1;
 }
