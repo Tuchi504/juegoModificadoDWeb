@@ -400,14 +400,14 @@ function turbo() {
    game.audio.volume.gain.value = 0;
    let audio = new Audio('../juegoModificadoDWeb/audio/sonido_desaceleracion_final.mp3');
    audio.play();
-   game.audio.volume.gain.value = 1;
+   game.audio.volume.gain.value = 3;
 }
 //sonido al chocar
 function choque() {
    game.audio.volume.gain.value = 0;
    let audio = new Audio('../juegoModificadoDWeb/audio/sonido_choque.mp3');
    audio.play();
-   game.audio.volume.gain.value = 1;
+   game.audio.volume.gain.value = 3;
 }
 game.audio = function () {
    if (game.audio.oscillator) {
@@ -417,7 +417,7 @@ game.audio = function () {
    }
    game.audio.context = new AudioContext();
    game.audio.volume = game.audio.context.createGain();
-   game.audio.volume.gain.value = 1;
+   game.audio.volume.gain.value = 3;
    game.audio.volume.connect(game.audio.context.destination);
    var o = game.audio.context.createOscillator();
    o.frequency.value = 0;
