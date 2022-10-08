@@ -422,7 +422,7 @@ game.audio = function () {
    var o = game.audio.context.createOscillator();
    o.frequency.value = 0;
    o.detune.value = 0;
-   o.type = "square"; //'sawtooth';
+   o.type = 'sawtooth'; //'sawtooth';
    o.connect(game.audio.volume);
    o.frequency.value = 60;
    game.audio.oscillator = o;
