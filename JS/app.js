@@ -375,7 +375,7 @@ clickstart.addEventListener("click", function () {
       let time = setInterval(()=>{
          lap.innerText = lap.value;
          win();
-      },50);
+      },1);
       clickstart.innerText = "Pausa!";
       game.time = 0;
       game.started = true;
@@ -422,7 +422,7 @@ game.audio = function () {
    var o = game.audio.context.createOscillator();
    o.frequency.value = 0;
    o.detune.value = 0;
-   o.type = 'sawtooth'; //'sawtooth';
+   o.type = 'sine'; //'sawtooth';
    o.connect(game.audio.volume);
    o.frequency.value = 60;
    game.audio.oscillator = o;
