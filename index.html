@@ -4,40 +4,43 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="../juegoModificadoDWeb/CSS/style.css">
+   <link rel="stylesheet" href="../juegoModificadoDWeb/CSS/style.css"><!--../juegoModificadoDWeb/CSS/style.css-->
    <title>Juego Modificado Enduro Diseño Web</title>
 </head>
-<body>
-   <div id="game">
-      <div id="sky"></div>
-      <div id="mountains">
+   <div id="game"><!-- Contenedor de todos los elementos del juego -->
+      <div id="sky"><!--Cielo del juego-->
+        <div class="tiempo">2:00</div><!--Tiempo restante de juego antes de perder-->
+      </div>
+      <div id="mountains"><!--Contenedor de las montañas-->
         <div class="mountain"></div>
         <div class="mountain"></div>
         <div class="mountain"></div>
         <div class="mountain"></div>
       </div>
-      <div id="terrain"><div id="velocidad"></div></div>
+      <div id="terrain">
+        <div id="velocidad"></div><!--Indicador de velocidad-->
+      </div>
       <!-- <div id="fog" class="hidden"></div> -->
-      <canvas id="road"></canvas>
-      <div id="cars"></div>
-      <div id="car" class="player car"></div>
+      <canvas id="road"></canvas><!--Pista por donde corren los carros-->
+      <div id="cars"></div><!--Elemento div que se repetirá para ser los carros oponentes-->
+      <div id="car" class="player car"></div><!--Elemento que representa al carro del jugador-->
       <div id="ui">
-        <div id="panel">
-          <div id="km"><a></a><a>0</a><a>0</a><a>0</a><a>0</a><a>0</a></div>
-          <div id="lap"><a>0</a></div>
-          <div id="position"><a>P</a><a>2</a><a>0</a><a>0</a></div>
+        <div id="panel"><!--Bloque que contiene estadísticas de la ronda de juego-->
+          <div id="km"><a></a><a>0</a><a>0</a><a>0</a><a>0</a><a>0</a></div><!--Kilómetros recorridos-->
+          <div id="lap"><a>0</a></div><!--Número de carros al que se ha rebasado-->
+          <div id="position"><a>P</a><a>2</a><a>0</a><a>0</a></div><!--Posición en base a 200 o número de carros a los que hay que rebasar para ganar-->
         </div>
       </div>
     </div>
     <p>
-      <button id="left">◀️</button>
-      <button id="up">⏏️</button>
-      <button id="right">▶️</button>
+      <button id="left">◀️</button><!--Botón para mover el carro a la izquierda-->
+      <button id="up">⏏️</button><!--Botón para acelerar o ir hacia adelante-->
+      <button id="right">▶️</button><!--Botón para mover el carro hacia la derecha-->
     </p>
-    <p><button id="click">Empezar!</button></p>
+    <p><button id="click">Empezar!</button></p><!--Botón para empezar/pausar/reanudar el juego-->
     <p>Flechas Izquierda/Derecha o A/D para girar<br> 
       Flecha Arriba, W o Espacio para acelerar
-    </p>
-    <script src="../juegoModificadoDWeb/JS/app.js"></script>
+    </p><!--Indicaciones de juego para el usuario-->
+    <script src="../juegoModificadoDWeb/JS/app.js"></script><!--../juegoModificadoDWeb/JS/app.js-->
 </body>
-</html>
+</html> 

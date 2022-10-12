@@ -1,6 +1,7 @@
 //CARS
 var car = document.getElementById("car");
 car.init = function () {
+   //Definición de las propiedades y estado inicial del carro
    car.speed = 0.2;
    car.turn = 0;
    car.x = car.offsetLeft;
@@ -13,16 +14,19 @@ car.init = function () {
    car.crashed = false;
    (car.acc = 0.03), (car.break = 0.08);
 };
+//Función para simular el movimiento de las llantas y el motor
 car.frame = function () {
    car.motor *= -1;
    car.style.left = parseInt(car.x) + "px";
    car.style.transform = "scaleX(" + car.motor + ")";
    car.steer();
 };
+//Función para hacer girar al carro
 car.steer = function () {
    car.x += car.sx;
    road.P0.x -= car.sx / 4;
 };
+//Función que se ejecuta cuando el carro choca
 car.crash = function (d) {
    if (!car.crashed) {
       choque();
@@ -38,10 +42,11 @@ car.crash = function (d) {
    }
 };
 var cars = document.getElementById("cars");
+//Función para asignar propiedades a los carros oponentes
 cars.init = function () {
-   cars.n = 32;
-   cars.x = 0;
-   cars.speed = 1;
+   cars.n = 24; //Distancia a la cual los carros oponentes ya son visibles en la carretera
+   cars.x = 0; 
+   cars.speed = 1;//velocidad de los carros oponentes
    cars.interval = 500;
    cars.oponents = [];
    cars.easy = 0.2; //cantidad de tráfico
@@ -55,6 +60,9 @@ cars.init = function () {
    document.body.appendChild(car.st);
    cars.builded = true;
 };
+/*Función para redimensionar el tamaño de los carros oponentes de acuerdo con la posición de la pista
+Definición de los límites para que se considere que el carro ha chocado
+Definición de los límites para desaparecer los carros oponentes*/
 cars.frame = function () {
    var relative = cars.speed - car.speed;
    for (var j = 0; j < cars.n; j++) {
@@ -113,6 +121,7 @@ cars.frame = function () {
       "#cars .car {transform: rotateX(-56deg) scaleX(" + car.motor + ") }";
    car.style.left = parseInt(car.x) + "px";
 };
+//Función que crea los carros oponentes
 cars.create = function (i, j) {
    var c = document.createElement("div");
    c.className = "car";
@@ -126,6 +135,7 @@ cars.create = function (i, j) {
    if ((i == 1 && j == 0) || (i == 1 && j == 1)) c.classList.add("hidden");
    return c;
 };
+//Función que cambia el tono y el brillo del color de los carros de manera aleatoria
 cars.color = function (c) {
    var randomColor = Math.random() * 360;
    var randomLight = 2.5 + Math.random() * 2;
@@ -370,12 +380,35 @@ buttons.forEach(function (id) {
    button.addEventListener("touchend", release);
 });
 var clickstart = document.getElementById("click");
+let tiempo = document.querySelector('.tiempo');
+let tiempoF=null, tiempoR=120000, difTiempo=0;
 clickstart.addEventListener("click", function () {
    if (!game.started) {
       let time = setInterval(()=>{
          lap.innerText = lap.value;
          win();
       },1);
+      if (tiempoF){
+         tiempoF = new Date (new Date().getTime() + difTiempo);
+         difTiempo = 0;
+      }else{
+         tiempoF = new Date (new Date().getTime() + tiempoR);
+      }
+      let tiempoJuego = setInterval(()=>{
+         tiempoR = tiempoF.getTime() - new Date().getTime();
+         if (tiempoR <= 0){
+            clearInterval(tiempoJuego);
+            game.audio.oscillator.stop();
+            alert('Perdiste! Se ha acabado el tiempo! Inténtalo de Nuevo!');
+            location.reload();
+         }else{
+            tiempo.textContent = `${Math.trunc((tiempoR/1000)/60)}:${(((tiempoR/1000)%60)).toFixed(0)}`;
+         }
+         if (clickstart.innerText == "Reanudar!"){
+            difTiempo = tiempoF.getTime() - new Date().getTime();
+            clearInterval(tiempoJuego);
+         }
+      },50);
       clickstart.innerText = "Pausa!";
       game.time = 0;
       game.started = true;
@@ -398,14 +431,14 @@ clickstart.addEventListener("click", function () {
 //sonido de turbo al desacelerar 
 function turbo() {
    game.audio.volume.gain.value = 0;
-   let audio = new Audio('../juegoModificadoDWeb/audio/sonido_desaceleracion_final.mp3');
+   let audio = new Audio('../juegoModificadoDWeb/audio/sonido_desaceleracion_final.mp3');//../juegoModificadoDWeb/audio/sonido_desaceleracion_final.mp3
    audio.play();
    game.audio.volume.gain.value = 3;
 }
 //sonido al chocar
 function choque() {
    game.audio.volume.gain.value = 0;
-   let audio = new Audio('../juegoModificadoDWeb/audio/sonido_choque.mp3');
+   let audio = new Audio('../juegoModificadoDWeb/audio/sonido_choque.mp3');//../juegoModificadoDWeb/audio/sonido_choque.mp3
    audio.play();
    game.audio.volume.gain.value = 3;
 }
@@ -473,7 +506,7 @@ fog.toggle = function () {
 */
 
 function win(){
-   if (car.position == 0) {
+   if (car.position <= 0) {
       game.audio.oscillator.stop();
       alert('Ganaste!');
       car.position = 200;
